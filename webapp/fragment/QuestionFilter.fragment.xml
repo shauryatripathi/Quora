@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleFilterDialogConfirm">
+		<filterItems>
+			<ViewSettingsFilterItem
+				text="Tag"
+				key="Tag"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="SAPUI5" key="Tag___Contains___SAPUI5" />
+					<ViewSettingsItem text="ABAP" key="Tag___Contains___SAPUI5" />
+					<ViewSettingsItem text="HANA" key="Tag___Contains___HANA" />
+					<ViewSettingsItem text="FICO" key="Tag___Contains___FICO" />
+					<ViewSettingsItem text="BASIS" key="Tag___Contains___BASIS" />
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,176 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "columnLayoutApp.columnLayout",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"quora.xsodata": {
+				"uri": "/mnaEmp/EmpDetails/quora.xsodata/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "columnLayoutApp.columnLayout.view.Master",
+			"type": "XML",
+			"async": true,
+			"id": "Master"
+		},
+		"dependencies": {
+			"minUI5Version": "1.65.6",
+			"libs": {
+				"sap.collaboration": {},
+				"sap.f": {},
+				"sap.m": {},
+				"sap.ui.comp": {},
+				"sap.ui.core": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "columnLayoutApp.columnLayout.i18n.i18n"
+				}
+			},
+			"oData": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "quora.xsodata",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.f.routing.Router",
+				"viewType": "XML",
+				"viewPath": "columnLayoutApp.columnLayout.view",
+				"controlId": "fcl",
+				"transition": "slide",
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "AboutPage",
+					"name": "AboutPage",
+					"target": "AboutPage",
+					"layout": "EndColumnFullScreen"
+				},
+				{
+					"pattern": "create",
+					"name": "create",
+					"target": "create",
+					"layout": "BeginColumnFullScreen"
+				},
+				{
+					"name": "Master",
+					"pattern": ":layout:",
+					"target": [
+						"Master",
+						"Detail"
+					]
+				},
+				{
+					"pattern": "Detail/{QID}/{layout}",
+					"name": "Detail",
+					"target": [
+						"Master",
+						"Detail"
+					]
+				},
+				{
+					"pattern": "DetailDetail/{QID}/{AID}/{layout}",
+					"name": "DetailDetail",
+					"target": [
+						"Master",
+						"Detail",
+						"DetailDetail"
+					]
+				}
+			],
+			"targets": {
+				"Master": {
+					"viewType": "XML",
+					"viewName": "Master",
+					"controlAggregation": "beginColumnPages"
+				},
+				"Detail": {
+					"viewType": "XML",
+					"viewName": "Detail",
+					"controlAggregation": "midColumnPages"
+				},
+				"FlexibleColumnLayout": {
+					"viewType": "XML",
+					"viewName": "FlexibleColumnLayout"
+				},
+				"DetailDetail": {
+					"viewType": "XML",
+					"viewName": "DetailDetail",
+					"controlAggregation": "endColumnPages"
+				},
+				"AboutPage": {
+					"viewType": "XML",
+					"viewName": "AboutPage",
+					"controlAggregation": "endColumnPages"
+				},
+				"create": {
+					"viewType": "XML",
+					"viewName": "createEntity",
+					"controlAggregation": "beginColumnPages"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}

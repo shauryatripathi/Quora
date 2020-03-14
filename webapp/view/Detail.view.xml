@@ -1,0 +1,87 @@
+<mvc:View controllerName="columnLayoutApp.columnLayout.controller.Detail" xmlns="sap.uxap" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m"
+	xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<m:Title text="{oData>QText}{detailView>/lineItemListTitle}" wrapping="true" class="sapUiSmallMarginEnd"/>
+				</expandedHeading>
+				<snappedHeading>
+					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+						<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+							<f:Avatar src="../../../../../../../{products>ProductPicUrl}" displaySize="S" displayShape="Square"/>
+							<m:Title text="{products>Name}" wrapping="true" class="sapUiTinyMarginEnd"/>
+						</m:FlexBox>
+					</m:FlexBox>
+				</snappedHeading>
+				<navigationActions>
+					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" tooltip="Enter Full Screen Mode"
+						visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" tooltip="Exit Full Screen Mode"
+						visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose" tooltip="Close column"
+						visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+				</navigationActions>
+				<actions>
+					<m:Button text="Verify" type="Emphasized" press="onVerify" enabled="{= ${oData>QPostedByID} === ${userId>/name} &amp;&amp; ${oData>Answerd} === '0'}"/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<headerContent>
+			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+				<f:Avatar src="../../../../../../../{products>ProductPicUrl}" displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd"></f:Avatar>
+				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+					<m:Label text="Posted BY:"/>
+					<m:Text text="{oData>QPostedByID}"/>
+				</m:VBox>
+				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+					<m:Label text="Name"/>
+					<m:Text text="{oData>QPostedByNAME}"/>
+				</m:VBox>
+			</m:FlexBox>
+		</headerContent>
+		<sections>
+			<ObjectPageSection title="Answers">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<m:FeedInput post="onPost" icon="sap-icon://person-placeholder" class="sapUiSmallMarginTopBottom" maxLength="250" showExceededText="true"/>	
+						</blocks>
+					</ObjectPageSubSection>
+					<ObjectPageSubSection>
+						<blocks>
+							<!--<m:FeedInput post="onPost" icon="sap-icon://person-placeholder" class="sapUiSmallMarginTopBottom" maxLength="250" showExceededText="true"/>-->
+							<m:Table id="lineItemsList" width="auto" items="{path:'oData>NavToAnswers',sorter: { path: 'VCOUNT', descending: true }}"
+								updateFinished="onListUpdateFinished" mode="SingleSelect" noDataText="{i18n>detailLineItemTableNoDataText}"
+								busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+								<m:columns>
+									<m:Column>
+										<!--<m:Text text="Home Team"/>-->
+									</m:Column>
+									<m:Column width="65%" demandPopin="true">
+										<!--<m:Text text="Away Team"/>-->
+									</m:Column>
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem type="Navigation" press="handleItemPress" highlight="{=${oData>Verified} === '0' ? 'Warning':'Success'}">
+										<m:cells>
+											<m:VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+												<m:Button icon="sap-icon://thumb-up" press="onVoteUp"/>
+												<m:Text text="{oData>VCOUNT}" id="vcount"/>
+											</m:VBox>
+											<m:HBox>
+												<core:Icon size="2rem" src="sap-icon://person-placeholder" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"/>
+												<m:ObjectIdentifier title="{oData>AText}" text="{oData>AID}"/>
+											</m:HBox>
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

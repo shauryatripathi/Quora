@@ -1,0 +1,20 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			Namespace="EmpDetails.quora">
+			<EntityType Name="QuestionsType">
+				<Key><PropertyRef Name="QID"/></Key><Property Name="QID" Nullable="false" Type="Edm.Int32"/><Property Name="QPostedByID" Type="Edm.String" MaxLength="15"/><Property Name="QPostedByNAME" Type="Edm.String" MaxLength="50"/><Property Name="QPostedOn" Type="Edm.DateTime"/><Property Name="QText" Type="Edm.String" MaxLength="2000"/><Property Name="Answerd" Type="Edm.String" MaxLength="1"/><Property Name="Tag" Type="Edm.String" MaxLength="265"/><NavigationProperty Name="NavToAnswers" ToRole="AnswersDependent" FromRole="QuestionsPrincipal"
+					Relationship="EmpDetails.quora.Questions_AnswersType"/></EntityType>
+			<EntityType Name="AnswersType">
+				<Key><PropertyRef Name="QID"/><PropertyRef Name="AID"/></Key><Property Name="QID" Nullable="false" Type="Edm.Int32"/><Property Name="AID" Nullable="false" Type="Edm.Int32"/><Property Name="APostedByID" Type="Edm.String" MaxLength="15"/><Property Name="APostedByNAME" Type="Edm.String" MaxLength="50"/><Property Name="APostedOn" Type="Edm.DateTime"/><Property Name="AText" Type="Edm.String" MaxLength="2000"/><Property Name="Verified" Type="Edm.String" MaxLength="1"/><Property Name="VCOUNT" Type="Edm.Int32"/></EntityType>
+			<EntityType Name="TagsType">
+				<Key><PropertyRef Name="TID"/></Key><Property Name="TID" Nullable="false" Type="Edm.Int32"/><Property Name="TagName" Type="Edm.String" MaxLength="256"/></EntityType>
+			<EntityType Name="VOTESType">
+				<Key><PropertyRef Name="QID"/><PropertyRef Name="AID"/><PropertyRef Name="VotedBy"/></Key><Property Name="QID" Nullable="false" Type="Edm.Int32"/><Property Name="AID" Nullable="false" Type="Edm.Int32"/><Property Name="VotedBy" Nullable="false" Type="Edm.String" MaxLength="256"/></EntityType>
+			<Association Name="Questions_AnswersType"><End Type="EmpDetails.quora.QuestionsType" Multiplicity="1" Role="QuestionsPrincipal"/><End Type="EmpDetails.quora.AnswersType" Multiplicity="*" Role="AnswersDependent"/></Association>
+			<EntityContainer Name="quora" m:IsDefaultEntityContainer="true"><EntitySet Name="Questions" EntityType="EmpDetails.quora.QuestionsType"/><EntitySet Name="Answers" EntityType="EmpDetails.quora.AnswersType"/><EntitySet Name="Tags" EntityType="EmpDetails.quora.TagsType"/><EntitySet Name="VOTES" EntityType="EmpDetails.quora.VOTESType"/>
+				<AssociationSet Name="Questions_Answers" Association="EmpDetails.quora.Questions_AnswersType"><End Role="QuestionsPrincipal" EntitySet="Questions"/><End Role="AnswersDependent" EntitySet="Answers"/></AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

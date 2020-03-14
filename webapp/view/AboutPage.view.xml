@@ -1,0 +1,111 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form"
+	controllerName="columnLayoutApp.columnLayout.controller.AboutPage" xmlns:html="http://www.w3.org/1999/xhtml">
+	<f:DynamicPage toggleHeaderOnTitleClick="false">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="About Score"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<VBox class="sapUiSmallMargin">
+				<form:Form id="FormChangeColumn_twoGroups234" editable="true">
+					<form:title>
+						<core:Title text="Supplier"/>
+					</form:title>
+					<form:layout>
+						<form:ColumnLayout columnsM="2" columnsL="3" columnsXL="4"/>
+					</form:layout>
+					<form:formContainers>
+						<form:FormContainer title="Address">
+							<form:formElements>
+								<form:FormElement label="Name">
+									<form:fields>
+										<Input value="{SupplierName}" id="name"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Street">
+									<form:fields>
+										<Input value="{Street}"/>
+										<Input value="{HouseNumber}">
+											<layoutData>
+												<form:ColumnElementData cellsSmall="2" cellsLarge="1"/>
+											</layoutData>
+										</Input>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="ZIP Code/City">
+									<form:fields>
+										<Input value="{ZIPCode}">
+											<layoutData>
+												<form:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+											</layoutData>
+										</Input>
+										<Input value="{City}"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Country">
+									<form:fields>
+										<Select id="country" selectedKey="{Country}">
+											<items>
+												<core:Item text="England" key="England"/>
+												<core:Item text="Germany" key="Germany"/>
+												<core:Item text="USA" key="USA"/>
+											</items>
+										</Select>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Web">
+									<form:fields>
+										<Input value="{Url}" type="Url"/>
+									</form:fields>
+								</form:FormElement>
+							</form:formElements>
+						</form:FormContainer>
+						<form:FormContainer title="Contact">
+							<form:formElements>
+								<form:FormElement label="Twitter">
+									<form:fields>
+										<Input value="{Twitter}"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Email">
+									<form:fields>
+										<Input value="{Email}" type="Email"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Tel.">
+									<form:fields>
+										<Input value="{Tel}" type="Tel"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="SMS">
+									<form:fields>
+										<Input value="{Sms}" type="Tel"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Mobile">
+									<form:fields>
+										<Input value="{Mobile}" type="Tel"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Pager">
+									<form:fields>
+										<Input value="{Pager}" type="Tel"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Fax">
+									<form:fields>
+										<Input value="{Fax}" type="Tel"/>
+									</form:fields>
+								</form:FormElement>
+							</form:formElements>
+						</form:FormContainer>
+					</form:formContainers>
+				</form:Form>
+			</VBox>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

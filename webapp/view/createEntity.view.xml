@@ -1,0 +1,41 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form"
+	controllerName="columnLayoutApp.columnLayout.controller.createEntity" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.m.semantic">
+	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:actions>
+					<Button text="cancel" type="Emphasized" press="onCancel"/>
+					<Button text="save" type="Transparent" enabled="{viewModel>/enableCreate}" press="onSave"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+		<form:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="newEntitySimpleForm"
+				labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"
+				title="{= ${viewModel>/mode} === 'edit'? 'Edit EmpDetails.quora.QuestionsType': 'New EmpDetails.quora.QuestionsType'}">
+				<form:content>
+					<Label text="QID" required="false"/>
+					<Input name="QID" id="QID_id" enabled="false" visible="false"
+						value="{ path: 'oData>QID', type: 'sap.ui.model.odata.type.Int32' , constraints:{ nullable:true } }"/>
+					<Label text="Qustion Posted By ID" required="false"/>
+					<Input name="QPostedByID" id="QPostedByID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true"
+						value="{ path: 'oData>QPostedByID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:15 } }"/>
+					<Label text="Question Posted By NAME" required="false"/>
+					<Input name="QPostedByNAME" id="QPostedByNAME_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"
+						value="{ path: 'oData>QPostedByNAME', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:50 } }"/>
+					<Label text="Question Posted On" required="false"/>
+					<DatePicker name="QPostedOn" value="{ path: 'oData>QPostedOn', type: 'sap.ui.model.type.DateTime'}" id="QPostedOn_id" type="DateTime"
+						enabled="true" visible="true"/>
+					<Label text="Question" required="false"/>
+					<TextArea placeholder="Enter Question" growing="true" growingMaxLines="7" width="100%" maxLength="2000" showExceededText="true"
+					value="{ path: 'oData>QText', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:2000 } }" 
+					name="QText" id="QText_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true"/>
+					<Label text="Select Tag" required="false"/>
+					<MultiComboBox id="Tag_id" selectionChange="handleSelectionChange" width="500px" items="{ path: 'oData>/Tags', sorter: { path: 'TID' } }">
+						<core:Item key="{oData>TID}" text="{oData>TagName}"/>
+					</MultiComboBox>
+				</form:content>
+			</form:SimpleForm>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

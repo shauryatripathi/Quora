@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "columnLayoutApp.columnLayout.QuoraApp",
+        "description": "Quora in FCL",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#QuoraApp-Display",
+        "navigationComponentName": "columnLayoutApp.columnLayout",
+        "intentSemanticObject": "QuoraApp",
+        "intentAction": "Display",
+        "html5ApplicationName": "quoraapp",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "e189043c-3fbe-4c52-a8af-e07ede412d8a"
+        ],
+        "contentPackages": [
+            "0bb31405-0514-4af5-98e7-18e48265f769"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Quora(FCL)",
+        "subtitle": "Subtitle",
+        "searchKeywords": "Quora(FCL),Subtitle",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

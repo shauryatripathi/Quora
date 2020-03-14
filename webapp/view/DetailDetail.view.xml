@@ -1,0 +1,57 @@
+<mvc:View controllerName="columnLayoutApp.columnLayout.controller.DetailDetail" xmlns:mvc="sap.ui.core.mvc" height="100%" xmlns="sap.f"
+	xmlns:form="sap.ui.layout.form" xmlns:m="sap.m" xmlns:core="sap.ui.core">
+	<DynamicPage toggleHeaderOnTitleClick="false">
+		<title>
+			<DynamicPageTitle>
+				<heading>
+					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+						<m:Title text="Answer ID({oData>AID})" wrapping="true" class="sapUiTinyMarginEnd"/>
+					</m:FlexBox>
+				</heading>
+				<navigationActions>
+					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" tooltip="Enter Full Screen Mode"
+						visible="{= ${/actionButtonsInfo/endColumn/fullScreen} !== null }"/>
+					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" tooltip="Exit Full Screen Mode"
+						visible="{= ${/actionButtonsInfo/endColumn/exitFullScreen} !== null }"/>
+					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose" tooltip="Close column"
+						visible="{= ${/actionButtonsInfo/endColumn/closeColumn} !== null }"/>
+				</navigationActions>
+			</DynamicPageTitle>
+		</title>
+		<content>
+			<m:VBox>
+				<m:TextArea growing="true" editable="false" growingMaxLines="7" width="100%" value="{oData>AText}" name="AText" visible="true"/>
+				<m:FeedInput post="onReplyPost" icon="sap-icon://person-placeholder" class="sapUiSmallMarginTopBottom" maxLength="250"
+					showExceededText="true"/>
+				<m:Table id="ReplyItem" width="auto" items="{path:'oData>NavToReplys',sorter: { path: 'RText', descending: true }}"
+					updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}"
+					busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+					<m:headerToolbar>
+						<m:OverflowToolbar>
+							<m:Title text="Replys" level="H2"/>
+						</m:OverflowToolbar>
+					</m:headerToolbar>
+					<m:columns>
+						<m:Column>
+							<!--<m:Text text="Home Team"/>-->
+						</m:Column>
+						<m:Column demandPopin="true">
+							<!--<m:Text text="Away Team"/>-->
+						</m:Column>
+					</m:columns>
+					<m:items>
+						<m:ColumnListItem>
+							<m:cells>
+								<m:HBox>
+									<core:Icon size="2rem" src="sap-icon://person-placeholder" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom"/>
+									<m:ObjectIdentifier title="{oData>RText}" text="{oData>RID}"/>
+								</m:HBox>
+								<m:ObjectIdentifier title="{oData>ReplyByName}" text=""/>
+							</m:cells>
+						</m:ColumnListItem>
+					</m:items>
+				</m:Table>
+			</m:VBox>
+		</content>
+	</DynamicPage>
+</mvc:View>
